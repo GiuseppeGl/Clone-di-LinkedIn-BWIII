@@ -57,6 +57,8 @@ useEffect(() => {
                                     </Card.Text>
                                     <Button className="fw-semibold" variant="primary">Disponibile per</Button>{' '}
                                     <Button className="fw-semibold" variant="outline-primary">Aggiungi sezione del profilo</Button>{' '}
+{/* bottone per prova GIT */}
+                                    <Button className="fw-semibold" variant="primary">Disponibile per</Button>{' '}
                                 </Col>
                                 <Col xs={4} className="bg-success">
                                 </Col>
