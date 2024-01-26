@@ -11,7 +11,7 @@ function App() {
         <HeaderComponent />
         <Routes>
           <Route element={<ProfilePage />} path="/" />
-          <Route element={<EditExperiencePage />} path="*" />
+          <Route element={<EditExperiencePage />} path="/edit" />
         </Routes>
 
       </BrowserRouter>

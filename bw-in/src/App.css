@@ -342,3 +342,12 @@ body{
     border-radius:30px;
     margin-top: 10px;
 } 
+
+
+/* BOTTONE Plus*/
+#plusBtn{
+    transition: transform 0.2s ease-in-out;
+}
+#plusBtn:hover{
+    transform:scale(1.8);
+}
