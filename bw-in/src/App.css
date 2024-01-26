@@ -287,12 +287,19 @@
 
 
 
+/* BODY */
+body{
+    height: 100vh;
+    background-color: #f4f2ee;
+}
+
 
 /* MAIN */
 #main {
     display: grid;
-    grid-template-columns: auto 50% auto;
+    grid-template-columns: auto 70% auto;
     background-color: #f4f2ee;
+    height: 100%;
 }
 
 #center {

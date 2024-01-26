@@ -1,12 +1,21 @@
 import "./App.css";
 import HeaderComponent from "./components/HeaderComponent";
-import MainComponent from "./components/MainComponent";
+import ProfilePage from "./pages/ProfilePage";
+import EditExperiencePage from "./pages/EditExperiencePage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-      <HeaderComponent />
-      <MainComponent />
+      <BrowserRouter>
+        <HeaderComponent />
+        <Routes>
+          <Route element={<ProfilePage />} path="/" />
+          <Route element={<EditExperiencePage />} path="*" />
+        </Routes>
+
+      </BrowserRouter>
+
     </div>
   );
 }
