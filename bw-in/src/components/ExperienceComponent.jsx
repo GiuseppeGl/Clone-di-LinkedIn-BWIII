@@ -6,6 +6,7 @@ import ExpCard from './ExpCard';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 
+
 export default function ExperienceComponent() {
 
     const [info, SetInfo] = React.useState([]);
