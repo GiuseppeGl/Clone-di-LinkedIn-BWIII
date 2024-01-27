@@ -1,13 +1,19 @@
 import React from 'react'
-import { Card, Button, Col, Row, Form, Container } from "react-bootstrap";
+import { Button, Col, Row, Form, Container } from "react-bootstrap";
 import axios from "axios";
 import { useEffect } from "react";
-import ExpCard from './ExpCard';
+
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { postExperience } from '../slice/addPref'
+
+
 
 
 
 export default function AddExperienceComponent() {
+
+    const dispatch = useDispatch();
 
     const [info, SetInfo] = React.useState([]);
 
@@ -45,6 +51,9 @@ export default function AddExperienceComponent() {
     return (
         <>
         < Container>
+        <Row>
+            <Col className='lg3'></Col>
+           < Col className='lg'>
              <Form>
       <Form.Group className="mb-3" controlId="formBasic">
         <Form.Label>role</Form.Label>
@@ -53,7 +62,7 @@ export default function AddExperienceComponent() {
           We'll never share your email with anyone else.
         </Form.Text> */}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasic">
+      <Form.Group className="mb-3" controlId="formBasic2">
         <Form.Label>company</Form.Label>
         <Form.Control type="text" placeholder="azienda" />
       </Form.Group>
@@ -61,15 +70,15 @@ export default function AddExperienceComponent() {
         <Form.Label>start date</Form.Label>
         <Form.Control type="date" placeholder="Seleziona una data" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicDate">
+      <Form.Group className="mb-3" controlId="formBasicDate3">
         <Form.Label>start date</Form.Label>
         <Form.Control type="date" placeholder="Seleziona una data" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasic">
+      <Form.Group className="mb-3" controlId="formBasic4">
         <Form.Label>description</Form.Label>
         <Form.Control as="textarea" rows={3} placeholder="mi occupo di..." />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasic">
+      <Form.Group className="mb-3" controlId="formBasic5">
         <Form.Label>area</Form.Label>
         <Form.Control type="text" placeholder="città" />
       </Form.Group>
@@ -81,10 +90,13 @@ export default function AddExperienceComponent() {
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
-      <Button variant="primary" type="button">
+      <Button variant="primary" type="button" onClick={() => dispatch(postExperience())}>
         Submit
       </Button>
     </Form>
+    </Col>
+    <Col className='lg3'></Col>
+    </Row>
     </Container>
         </>
     )
