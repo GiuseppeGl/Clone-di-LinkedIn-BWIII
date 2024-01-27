@@ -1,13 +1,11 @@
 import React from 'react'
-import ExperienceComponent from '../components/ExperienceComponent'
+
+import AddExperienceComp from '../components/AddExperienceComp'
 export default function EditExperiencePage() {
   return (
-    <ExperienceComponent/>
+    <AddExperienceComp/>
     /* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
 
     /* ddddddddddddddddd */
   )
 }
-
-
-/* ramificazione */

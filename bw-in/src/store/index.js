@@ -1,8 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
-
+import reducer from '../slice/deletePref'
 
 export const store = configureStore({
-    reducer : {
-       
-    }
+    reducer : { experience : reducer }
 })
