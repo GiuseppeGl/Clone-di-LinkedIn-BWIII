@@ -53,6 +53,7 @@ export default function ExperienceComponent() {
                         </Col>
                         <Col className="text-end" xs={2}>
                             <Button id="plusBtn" variant="outline-light-subtle" onClick={()=> navigate("/edit")} > <i className="bi bi-plus-lg"></i> </Button>
+                            <Button id="plusBtn" variant="outline-light-subtle" onClick={()=> navigate("/add")} > <i className="bi bi-airplane-engines-fill"></i> </Button>
                         </Col>
 
                     </Row>

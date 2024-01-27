@@ -40,12 +40,12 @@ export const deletePref = createAsyncThunk(
   
       reducers: (create) => ({
         addExperience: create.reducer((state, action) => {
-          console.log(action);
-          state.userlist.push(action.payload)
+          /* console.log(action);
+          state.userlist.push(action.payload) */
         }),
         deleteExperience: create.reducer((state, action) => {
-          console.log(action);
-          state.userlist =  state.filter(ele => ele !== action.payload)
+          console.log(action, "funziono");
+          /* state.userlist =  state.filter(ele => ele !== action.payload) */
         })
       })
     }
