@@ -59,7 +59,8 @@ export const postExperienceAsync = createAsyncThunk(
         },
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo',
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo",
           },
         }
       );
@@ -74,6 +75,7 @@ export const postExperienceAsync = createAsyncThunk(
     }
   }
 );
+
 
 export const deleteExperienceAsync = createAsyncThunk(
   "experiences/deleteExperience",
@@ -82,26 +84,23 @@ export const deleteExperienceAsync = createAsyncThunk(
       const response = await axios.delete(
         `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`,
         {
-
-        },
-        {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo',
-          },
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo",
+          }
         }
       );
 
       const data = response.data;
-      console.log("Esperienza aggiunta con successo:", data);
+      console.log("Esperienza cancellata con successo:", data);
 
       return data;
     } catch (error) {
-      console.error("Errore durante l'aggiunta dell'esperienza:", error);
+      console.error("Errore durante la cancellazione dell'esperienza:", error);
       throw error;
     }
   }
 );
-
 
 // Faccio la chiamata post per l'immagine
 export const postImageAsync = createAsyncThunk(
@@ -144,7 +143,7 @@ export const addExpSlice = createSlice({
       console.log(state, action, "funziono postImage");
       // Modifico l'URL dell'immagine dell'esperienza 
       const { expId, imageUrl } = action.payload;
-      const experience = state.experience.find(exp => exp._id === expId);
+      const experience = state.experience.find(exp => exp._id === action.payload._id);
       if (experience) {
         experience.image = imageUrl;
       }
@@ -196,8 +195,20 @@ export const addExpSlice = createSlice({
       .addCase(deleteExperienceAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Error get experience";
-      });
-
+      })
+      .addCase(deleteExperienceAsync.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(deleteExperienceAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.experience = state.experience;
+      })
+      .addCase(deleteExperienceAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Error get experience";
+      });;
   }
 });
 
