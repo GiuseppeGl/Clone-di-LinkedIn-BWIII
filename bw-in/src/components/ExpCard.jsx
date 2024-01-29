@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Card, Badge } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteExperience } from '../slice/deletePref';
 import ModalComponent from './ModalComponent';
+import { deleteExperienceAsync } from '../slice/addPref';
 
 export default function ExpCard({ exp }) {
   const dispatch = useDispatch();
@@ -10,9 +10,6 @@ export default function ExpCard({ exp }) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  
-
 
 
   return (
@@ -49,7 +46,7 @@ export default function ExpCard({ exp }) {
           edit
         </Badge>
         <ModalComponent show={show} onHide={handleClose} />
-        <Badge className='text-align-end btn text-white' pill bg="danger" onClick={() => dispatch(deleteExperience(exp.id))}>
+        <Badge className='text-align-end btn text-white' pill bg="danger" onClick={() => dispatch(deleteExperienceAsync({ expId: exp._id, userId: '65b6dacd8277b800192c90ce' }))}>
           delete
         </Badge>
       </div>
