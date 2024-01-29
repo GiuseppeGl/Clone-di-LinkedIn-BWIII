@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { getPref, postExperience } from '../slice/addPref';
+import { getPref, postExperience, postExperienceAsync } from '../slice/addPref';
 
 export default function ModalComponent({ show, onHide }) {
 
@@ -33,7 +33,7 @@ export default function ModalComponent({ show, onHide }) {
     };
 
     const handleSaveExperience = () => {
-        dispatch(postExperience({ userId: '65b6dacd8277b800192c90ce', experienceData: formData }));
+        dispatch(postExperienceAsync({ userId: '65b6dacd8277b800192c90ce', experienceData: formData }));
         onHide();
     };
 

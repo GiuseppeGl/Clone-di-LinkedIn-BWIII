@@ -42,7 +42,7 @@ export default function ExperienceComponent() {
 
                     </Row>
                     {experiences && experiences.map((esp, index) => {
-                        return <ExpCard key={index} exp={esp} />
+                        return <ExpCard key={esp._id} exp={esp} />
                     })
 
                     }
