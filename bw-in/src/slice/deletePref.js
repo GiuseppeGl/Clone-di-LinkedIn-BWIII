@@ -11,8 +11,8 @@ export const deletePref = createAsyncThunk(
   "experiences/delete",
   async ({ userId, expId }) => {
     try {
-      const response = await axios.delete(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`,
+      const response = await axios.post(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
         {
           headers: {
             Authorization:
@@ -40,11 +40,11 @@ export const deletePref = createAsyncThunk(
   
       reducers: (create) => ({
         addExperience: create.reducer((state, action) => {
-          /* console.log(action);
-          state.userlist.push(action.payload) */
+          console.log(action, "funziono deleete addex");
+          /* state.userlist.push(action.payload)  */
         }),
         deleteExperience: create.reducer((state, action) => {
-          console.log(action, "funziono");
+          console.log(action, "funziono deleete");
           /* state.userlist =  state.filter(ele => ele !== action.payload) */
         })
       })
