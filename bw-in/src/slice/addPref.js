@@ -196,19 +196,6 @@ export const addExpSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Error get experience";
       })
-      .addCase(deleteExperienceAsync.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(deleteExperienceAsync.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = "";
-        state.experience = state.experience;
-      })
-      .addCase(deleteExperienceAsync.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Error get experience";
-      });;
   }
 });
 
