@@ -2,67 +2,145 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    experience : [
-        {"role": "CTO",
-        "company": "Strive School",
-        "startDate": "2019-06-16",
-        "endDate": "2019-06-16", // could be null
-        "description": "Doing stuff",
-        "area": "Berlin",}
-
-
-    ],
-    loading: false,
-    error: ""
-}
+  experience: [
+    {
+      role: "CTO",
+      company: "Strive School",
+      startDate: "2019-06-16",
+      endDate: null, // could be null
+      description: "Doing stuff",
+      area: "Berlin",
+      image: 'https://cicemcto.com/wp-content/uploads/2022/06/MicrosoftTeams-image-40-copia-copia-150x150.png'
+    },
+  ],
+  loading: false,
+  error: "",
+};
 
 export const getPref = createAsyncThunk(
-  "experiences/delete",
-  async ({ userId, expId }) => {
+  "experiences/get",
+  async ({ userId }) => {
     try {
-      const response = await axios.put(
-        `https://striveschool-api.herokuapp.com/api/profile/6551ed5ac55e7e0018f83c0b/experiences`,
+      const response = await axios.get(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIyMjdlOTkxM2Y2NTAwMThkMDk1M2YiLCJpYXQiOjE3MDYxODMzNzMsImV4cCI6MTcwNzM5Mjk3M30.jlnbNCzWMI4-v24KVu6nH7wwIrEHBS8ld2efQrYXFUo",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo",
           },
         }
       );
 
       const data = response.data;
-      console.log("Esperienza cancellata con successo:", data);
+      console.log("Dati ottenuti con successo:", data);
 
-      return data; // Ritorno i dati nel caso tu voglia gestirli nel tuo reducer
+      return data;
     } catch (error) {
-      console.error("Errore durante la cancellazione dell'esperienza:", error);
+      console.error("Errore durante l'ottenimento delle esperienze:", error);
       throw error;
     }
   }
 );
 
-  
-  export const addExpSlice = createSlice(
-    {
-      name: 'addExperience',
-      initialState: initialState,
-  
-      reducers: (create) => ({
-        postExperience: create.reducer((state, action) => {
-            console.log(state, action, "funziono post");
-        /*   state.userlist.push(action.payload)  */
-        }),
-        deleteExperience: create.reducer((state, action) => {
-          console.log(action, "non funziono");
-          /* state.userlist =  state.filter(ele => ele !== action.payload) */
-        })
-      })
+// Faccio la chiamata post
+export const postExperienceAsync = createAsyncThunk(
+  "experiences/postExperience",
+  async ({ userId, experienceData }) => {
+    try {
+      const response = await axios.post(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
+        {
+          ...experienceData,
+        },
+        {
+          headers: {
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4CI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo',
+          },
+        }
+      );
+
+      const data = response.data;
+      console.log("Esperienza aggiunta con successo:", data);
+
+      return data;
+    } catch (error) {
+      console.error("Errore durante l'aggiunta dell'esperienza:", error);
+      throw error;
     }
-  )
+  }
+);
 
-  console.log(initialState)
+// Faccio la chiamata post per l'immagine
+export const postImageAsync = createAsyncThunk(
+  "experiences/postImage",
+  async ({ userId, expId, imageUrl }) => {
+    try {
+      const response = await axios.post(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
+        { imageUrl },
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo",
+          },
+        }
+      );
 
-    const {actions, reducer} = addExpSlice;
-    export const {postExperience, deleteExperience} = actions;
+      const data = response.data;
+      console.log("Immagine aggiunta con successo:", data);
 
-    export default reducer;
+      return { expId, imageUrl };
+    } catch (error) {
+      console.error("Errore durante l'aggiunta dell'immagine:", error);
+      throw error;
+    }
+  }
+);
+
+export const addExpSlice = createSlice({
+  name: 'addExperience',
+  initialState: initialState,
+
+  reducers: {
+    postExperience: (state, action) => {
+      console.log(state, action, "funziono post");
+      // Aggiungo le esperienze all'array delle esperienze
+      state.experience.push(action.payload);
+    },
+    postImage: (state, action) => {
+      console.log(state, action, "funziono postImage");
+      // Modifico l'URL dell'immagine dell'esperienza 
+      const { expId, imageUrl } = action.payload;
+      const experience = state.experience.find(exp => exp._id === expId);
+      if (experience) {
+        experience.image = imageUrl;
+      }
+    },
+    deleteExperience: (state, action) => {
+      console.log(action, "funziono delete");
+      // Rimuovo l'esperienza tramite l'id
+      state.experience = state.experience.filter(exp => exp._id !== action.payload);
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(getPref.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getPref.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.experience = [...state.experience, ...action.payload];
+      })
+      .addCase(getPref.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Error get experience";
+      });
+  }
+});
+
+const { actions, reducer } = addExpSlice;
+export const { postExperience, deleteExperience, postImage } = actions;
+export default reducer;
