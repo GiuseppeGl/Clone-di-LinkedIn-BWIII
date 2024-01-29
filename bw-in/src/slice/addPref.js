@@ -4,18 +4,22 @@ import axios from "axios";
 const initialState = {
   experience: [
     {
-      role: "CTO",
-      company: "Strive School",
-      startDate: "2019-06-16",
-      endDate: null, // could be null
-      description: "Doing stuff",
-      area: "Berlin",
-      image: 'https://cicemcto.com/wp-content/uploads/2022/06/MicrosoftTeams-image-40-copia-copia-150x150.png'
-    },
+      userId: '65b6dacd8277b800192c90ce',
+      experienceData: {
+        role: "CTO",
+        company: "Strive School",
+        startDate: "2019-06-16",
+        endDate: null, // could be null
+        description: "Doing stuff",
+        area: "Berlin",
+        image: 'https://cicemcto.com/wp-content/uploads/2022/06/MicrosoftTeams-image-40-copia-copia-150x150.png'
+      }
+    }
   ],
   loading: false,
   error: "",
 };
+
 
 export const getPref = createAsyncThunk(
   "experiences/get",
