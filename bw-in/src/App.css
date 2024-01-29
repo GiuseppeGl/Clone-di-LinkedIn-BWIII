@@ -324,7 +324,6 @@ body{
 }
 
 #trenta {
-    background-color: red;
     grid-column-start: 2;
     grid-column-end: 3;
     /*  grid-row-start: 1;
@@ -350,4 +349,10 @@ body{
 }
 #plusBtn:hover{
     transform:scale(1.8);
+}
+
+
+/* Bottone messaggio */
+.roundedP{
+    border-radius: 50em;
 }

@@ -7,6 +7,7 @@ import Analisi from "../components/Analisi";
 import Risorse from "../components/Risorse";
 import ProfileComponent from "../components/ProfileComponent";
 import ExperienceComponent from "../components/ExperienceComponent";
+import AsideComponent from "../components/AsideComponent";
 
 
 export default function MainComponent() {
@@ -21,7 +22,9 @@ export default function MainComponent() {
           <Risorse />
           <ExperienceComponent/>
         </div>
-        <div id="trenta"></div>
+        <div id="trenta">
+          <AsideComponent/>
+        </div>
       </div>
     </div>
   );

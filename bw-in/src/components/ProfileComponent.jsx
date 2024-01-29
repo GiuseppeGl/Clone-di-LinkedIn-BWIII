@@ -14,7 +14,7 @@ export default function ProfileComponent() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://striveschool-api.herokuapp.com/api/profile",
+          "https://striveschool-api.herokuapp.com/api/profile/me",
           {
             headers: {
               Authorization:
