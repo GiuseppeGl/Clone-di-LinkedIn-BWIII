@@ -36,6 +36,9 @@ export default function ProfileComponent() {
           console.log('File caricato con successo:', response.data);
           // Aggiorna lo stato o esegui altre operazioni necessarie
           fetchData();
+          if (response.status === 200) {
+            handleCloseModal()
+          }
         })
         .catch((error) => {
           console.error('Errore durante il caricamento del file:', error);
@@ -82,7 +85,7 @@ export default function ProfileComponent() {
   return (
     <Card style={{ height: "50vh" }}>
       <Card.Header style={{ position: "relative", height: "35%" }}>
-        <img src={info.image} id="propic" alt="propic" onClick={handleImageClick} />
+        <img src={info.image} id="propic" alt="propic" style={{ cursor: 'pointer', }} onClick={handleImageClick} />
       </Card.Header>
       <Modal show={showModal} onHide={handleCloseModal}>
         <img src={info.image} onClick={handleImageClick} />
@@ -90,12 +93,11 @@ export default function ProfileComponent() {
           <p>Contenuto del tuo modal</p>
           <input type="file" onChange={handleFileChange} accept="image/*" />
         </Modal.Body>
-
         <Modal.Footer>
-          <Button variant="primary" onClick={handleFileUpload}>
-            Cambia la tua immagine del Profilo
-          </Button>
-          <button onClick={handleCloseModal}>Chiudi</button>
+          <div>
+            <p className='text-danger'>Una volta scelta l'immagine attendi la chiusura del modale per il corretto caricamento.</p>
+            <button onClick={handleCloseModal}>Chiudi</button>
+          </div>
         </Modal.Footer>
       </Modal>
       <Card.Body>

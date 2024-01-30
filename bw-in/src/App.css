@@ -283,12 +283,13 @@
     display: flex;
     align-items: center;
 }
+
 /* Da Modificare */
 
 
 
 /* BODY */
-body{
+body {
     height: 100vh;
     background-color: #f4f2ee;
 }
@@ -331,28 +332,31 @@ body{
 }
 
 /* CARD PROFILO */
-#propic{
+#propic {
     width: 100px;
+    height: 85px;
     position: absolute;
     bottom: -35px;
     border-radius: 50%;
 }
-.fw-semibold{
-    border-radius:30px;
+
+.fw-semibold {
+    border-radius: 30px;
     margin-top: 10px;
-} 
+}
 
 
 /* BOTTONE Plus*/
-#plusBtn{
+#plusBtn {
     transition: transform 0.2s ease-in-out;
 }
-#plusBtn:hover{
-    transform:scale(1.8);
+
+#plusBtn:hover {
+    transform: scale(1.8);
 }
 
 
 /* Bottone messaggio */
-.roundedP{
+.roundedP {
     border-radius: 50em;
 }
