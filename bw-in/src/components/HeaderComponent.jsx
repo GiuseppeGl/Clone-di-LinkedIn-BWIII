@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 
 
 export default function HeaderComponent() {
@@ -25,10 +25,10 @@ export default function HeaderComponent() {
           <nav id="Nav">
             <ul id="NavListWrap">
               <li className="NavList active">
-                <a href="/feed">
+                <Link className='NavLink' to="/">
                   <img src="/images/nav-home.svg" alt="" />
                   <span>Home</span>
-                </a>
+                  </Link>
               </li>
               <li className="NavList">
                 <a href="/feed">
@@ -37,7 +37,7 @@ export default function HeaderComponent() {
                 </a>
               </li>
               <li className="NavList">
-                <a href="/feed">
+                <a href="/jobs">
                   <img src="/images/nav-jobs.svg" alt="" />
                   <span>Jobs</span>
                 </a>
@@ -55,12 +55,13 @@ export default function HeaderComponent() {
                 </a>
               </li>
               <li id ="User" className="Navlist">
-                <a>
+                <Link to="/profile">
                   {/* {props.user && props.user.photoURL ? <img src={props.user.photoURL} alt="" /> : <img src="/images/user.svg" alt="" />} */}
+                 <img src="https://epicode-testapi-bucket.s3.eu-south-1.amazonaws.com/1700129606167-download.jpg" alt="img_profile" />
                   <span>
-                    Me <img src="/images/down-icon.svg" alt="" />
+                    Me 
                   </span>
-                </a>
+                </Link>
                 <div id="SignOut" /* onClick={() => props.signOut()} */>
                   <a>Sign Out</a>
                 </div>

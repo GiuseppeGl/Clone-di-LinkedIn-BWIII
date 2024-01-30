@@ -23,8 +23,9 @@ export default function ExpCard({ exp }) {
             {exp.image && <img src={exp.image} className="img-fluid" alt="placeholder" />}
           </div>
           <div className="flex-column p-0 mx-2">
-            <p className="fs-7 mt-2 p-0 fw-bold">
+            <p className="mt-2 p-0 fw-bold" style={{ fontSize: '17px' }}>
               {exp.role} <br />
+              <span style={{ fontWeight: 'normal', fontSize: '14px' }}>{exp.company}</span> <br />
               <span className='text-muted' style={{ fontWeight: 'normal', fontSize: '13px' }}>
                 {(exp.startDate && exp.endDate !== null && exp.startDate.slice()) ? (
                   <span>{exp.startDate.slice(0, 7)} / {exp.endDate.slice(0, 7)}</span>
