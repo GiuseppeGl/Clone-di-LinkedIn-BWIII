@@ -1,9 +1,6 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 export default function HeaderComponent() {
-  const navigate = useNavigate();
   return (
     <div id="Container">
       <div id="Content">
@@ -38,13 +35,10 @@ export default function HeaderComponent() {
               </a>
             </li>
             <li className="NavList">
-              <Button
-                onClick={() => navigate("/jobs")}
-                className="bg-transparent border-0"
-              >
-                <img src="/images/nav-jobs.svg" alt="" className="" />
-                <span className="text-secondary">Jobs</span>
-              </Button>
+              <a href="/feed">
+                <img src="/images/nav-jobs.svg" alt="" />
+                <span>Jobs</span>
+              </a>
             </li>
             <li className="NavList">
               <a href="/feed">
