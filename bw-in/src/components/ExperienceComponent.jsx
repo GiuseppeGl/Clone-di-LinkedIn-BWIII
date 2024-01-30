@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Card, Button, Col, Row } from "react-bootstrap";
 import { useEffect } from "react";
 import ExpCard from './ExpCard';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ModalComponent from './ModalComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPref } from '../slice/addPref';
@@ -15,6 +15,7 @@ export default function ExperienceComponent() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const experiences = useSelector((state) => state.addExperience.experience);
+    const location = useLocation();
     console.log(experiences)
 
     useEffect(() => {
@@ -24,16 +25,24 @@ export default function ExperienceComponent() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const isNotHomePage = location.pathname !== '/';
+
     return (
         <>
             <Card className="my-2">
                 <Row className="w-100 align-self-center justify-content-center">
                     <Row className="m-2">
                         <Col xs={10}>
-                            <h4 className="mx-2"><Button id="plusBtn" style={{ marginRight: '0.1rem' }} variant="outline-light-subtle" onClick={() => navigate('/')}><i className="bi bi-arrow-left"></i></Button>Esperienza</h4>
-                            <p className="fs-7">
-                                <i className="bi bi-eye"></i>solo per te
-                            </p>
+                            <h4 className="mx-2"> Esperienza</h4>
+                            {isNotHomePage && (
+                                <>
+                                    <Button id="plusBtn" style={{ marginRight: '0.1rem' }} variant="outline-light-subtle" onClick={() => navigate('/')}><i className="bi bi-arrow-left"></i></Button>
+                                    <p className="fs-7">
+                                        <i className="bi bi-eye"></i>solo per te
+                                    </p> </>
+
+                            )}
+
                         </Col>
                         <Col className="text-end" xs={2}>
                             <Button id="plusBtn" variant="outline-light-subtle" onClick={() => navigate("/edit")} > <i className="bi bi-plus-lg"></i> </Button>

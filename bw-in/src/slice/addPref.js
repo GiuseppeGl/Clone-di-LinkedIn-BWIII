@@ -102,8 +102,8 @@ export const deleteExperienceAsync = createAsyncThunk(
   }
 );
 
-// Faccio la chiamata post per l'immagine
-export const postImageAsync = createAsyncThunk(
+// Faccio la chiamata post per l'immagine experience
+export const postImageExperienceAsync = createAsyncThunk(
   "experiences/postImage",
   async ({ userId, expId, imageUrl }) => {
     try {
@@ -190,7 +190,7 @@ export const addExpSlice = createSlice({
       .addCase(deleteExperienceAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
-        state.experience = action.payload;
+        state.experience = state.experience.filter(exp => exp._id !== action.payload._id);
       })
       .addCase(deleteExperienceAsync.rejected, (state, action) => {
         state.loading = false;

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getPref, postExperience, postExperienceAsync } from '../slice/addPref';
+import axios from 'axios';
 
 export default function ModalComponent({ show, onHide }) {
 
     const dispatch = useDispatch();
     const [selectedCheck1, setSelectedCheck1] = useState(false);
     const [selectedCheck2, setSelectedCheck2] = useState(false);
-
+    const [selectedFile, setSelectedFile] = useState(null);
+    const experiences = useSelector((state) => state.addExperience.experience);
+    console.log(experiences)
 
     useEffect(() => {
         dispatch(getPref({ userId: '65b6dacd8277b800192c90ce' }));
@@ -41,14 +44,14 @@ export default function ModalComponent({ show, onHide }) {
             // Implementa la logica per il caricamento del file
             if (selectedFile) {
                 const formData = new FormData();
-                formData.append('profile', selectedFile);
+                formData.append('experience', selectedFile);
     
     
                 // Esegui la richiesta di caricamento del file
-                axios.post(` https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, formData, {
+                axios.post(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIyMjdlOTkxM2Y2NTAwMThkMDk1M2YiLCJpYXQiOjE3MDYxODMzNzMsImV4cCI6MTcwNzM5Mjk3M30.jlnbNCzWMI4-v24KVu6nH7wwIrEHBS8ld2efQrYXFUo",
+                        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo",
                     },
                 })
                     .then((response) => {
@@ -151,7 +154,7 @@ export default function ModalComponent({ show, onHide }) {
                             type="file"
                             name="image"
                             accept="image/*"
-                            /* onChange= handleFileChange  */ />
+                           /*  onChange={handleFileChange} */ />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check
