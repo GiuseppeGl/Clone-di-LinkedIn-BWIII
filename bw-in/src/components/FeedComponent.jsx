@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import axios from 'axios';
-
+import "./HomePage.css"
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [newPostText, setNewPostText] = useState('');
@@ -100,23 +100,24 @@ const Home = () => {
       <Row className="mt-4">
         <Col md={8}>
           <Form onSubmit={handlePostSubmit}>
-            <Form.Group controlId="newPostText">
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Cosa hai in mente?"
-                value={newPostText}
-                onChange={(e) => setNewPostText(e.target.value)}
-              />
-            </Form.Group>
+          <Form.Group controlId="newPostText" className="textarea-container">
+  <Form.Control
+  id='largo'
+    as="textarea"
+    rows={3}
+    placeholder="Cosa hai in mente?"
+    value={newPostText}
+    onChange={(e) => setNewPostText(e.target.value)}
+  />
+</Form.Group>
             <Button variant="info" type="submit">
               {editingPostId !== null ? 'Salva Modifica' : 'Crea Post'}
             </Button>
           </Form>
           <hr />
           {posts.map((post) => (
-            <Card key={post._id} className="mb-3">
-              <Card.Body>
+            <Card id='largo' key={post._id} className="mb-3">
+              <Card.Body >
                 <Card.Subtitle className="mb-2 text-muted">
                   {new Date(post.createdAt).toLocaleString()}
                 </Card.Subtitle>
