@@ -287,12 +287,13 @@
   display: flex;
   align-items: center;
 }
+
 /* Da Modificare */
 
 /* BODY */
 body {
-  height: 100vh;
-  background-color: #f4f2ee;
+    height: 100vh;
+    background-color: #f4f2ee;
 }
 
 /* MAIN */
@@ -332,25 +333,29 @@ body {
 
 /* CARD PROFILO */
 #propic {
-  width: 100px;
-  position: absolute;
-  bottom: -35px;
-  border-radius: 50%;
+    width: 100px;
+    height: 85px;
+    position: absolute;
+    bottom: -35px;
+    border-radius: 50%;
 }
+
 .fw-semibold {
-  border-radius: 30px;
-  margin-top: 10px;
+    border-radius: 30px;
+    margin-top: 10px;
 }
+
 
 /* BOTTONE Plus*/
 #plusBtn {
-  transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
+
 #plusBtn:hover {
-  transform: scale(1.8);
+    transform: scale(1.8);
 }
 
 /* Bottone messaggio */
 .roundedP {
-  border-radius: 50em;
+    border-radius: 50em;
 }
