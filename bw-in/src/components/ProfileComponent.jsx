@@ -1,11 +1,34 @@
 import React from 'react'
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Modal, Row } from "react-bootstrap";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProfileComponent() {
 
   const [info, SetInfo] = React.useState({});
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleImageClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleFileUpload = () => {
+    // Implementa la logica per il caricamento del file
+    console.log('Caricamento del file');
+  };
+
+  const handleFileChange = (event) => {
+    // Gestisci il cambiamento del file
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
 
   useEffect(() => {
     fetchData();
@@ -14,7 +37,7 @@ export default function ProfileComponent() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://striveschool-api.herokuapp.com/api/profile",
+        "https://striveschool-api.herokuapp.com/api/profile/me",
         {
           headers: {
             Authorization:
@@ -35,8 +58,22 @@ export default function ProfileComponent() {
   return (
     <Card style={{ height: "50vh" }}>
       <Card.Header style={{ position: "relative", height: "35%" }}>
-        <img src={info.image} id="propic" alt="propic" />
+        <img src={info.image} id="propic" alt="propic" onClick={handleImageClick} />
       </Card.Header>
+      <Modal show={showModal} onHide={handleCloseModal}>
+      <img src={info.image}  onClick={handleImageClick} />        
+      <Modal.Body>
+          <p>Contenuto del tuo modal</p>
+          <input type="file" onChange={handleFileChange} accept="image/*" />
+        </Modal.Body>
+        
+        <Modal.Footer>
+        <Button variant="primary" onClick={handleFileUpload}>
+            Cambia la tua immagine del Profilo
+          </Button>
+          <button onClick={handleCloseModal}>Chiudi</button>
+        </Modal.Footer>
+      </Modal>
       <Card.Body>
         <Row>
           <Col xs={8}>
