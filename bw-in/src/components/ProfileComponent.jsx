@@ -22,23 +22,23 @@ export default function ProfileComponent() {
     // Implementa la logica per il caricamento del file
     if (selectedFile) {
       const formData = new FormData();
-      formData.append('file', selectedFile);
+      formData.append('profile', selectedFile);
 
 
       // Esegui la richiesta di caricamento del file
       axios.post(`https://striveschool-api.herokuapp.com/api/profile/${info._id}/picture`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: '"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo"',
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWIyMjdlOTkxM2Y2NTAwMThkMDk1M2YiLCJpYXQiOjE3MDYxODMzNzMsImV4cCI6MTcwNzM5Mjk3M30.jlnbNCzWMI4-v24KVu6nH7wwIrEHBS8ld2efQrYXFUo",
         },
       })
-      .then((response) => {
-        console.log('File caricato con successo:', response.data);
-        // Aggiorna lo stato o esegui altre operazioni necessarie
-      })
-      .catch((error) => {
-        console.error('Errore durante il caricamento del file:', error);
-      });
+        .then((response) => {
+          console.log('File caricato con successo:', response.data);
+          // Aggiorna lo stato o esegui altre operazioni necessarie
+        })
+        .catch((error) => {
+          console.error('Errore durante il caricamento del file:', error);
+        });
     }
   };
 
@@ -52,6 +52,10 @@ export default function ProfileComponent() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    handleFileUpload();
+  }, [selectedFile])
 
   const fetchData = async () => {
     try {
@@ -80,14 +84,14 @@ export default function ProfileComponent() {
         <img src={info.image} id="propic" alt="propic" onClick={handleImageClick} />
       </Card.Header>
       <Modal show={showModal} onHide={handleCloseModal}>
-      <img src={info.image}  onClick={handleImageClick} />        
-      <Modal.Body>
+        <img src={info.image} onClick={handleImageClick} />
+        <Modal.Body>
           <p>Contenuto del tuo modal</p>
           <input type="file" onChange={handleFileChange} accept="image/*" />
         </Modal.Body>
-        
+
         <Modal.Footer>
-        <Button variant="primary" onClick={handleFileUpload}>
+          <Button variant="primary" onClick={handleFileUpload}>
             Cambia la tua immagine del Profilo
           </Button>
           <button onClick={handleCloseModal}>Chiudi</button>
