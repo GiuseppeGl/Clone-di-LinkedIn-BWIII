@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ModalComponent from './ModalComponent';
 import { deleteExperienceAsync } from '../slice/addPref';
 
-export default function ExpCard({ exp }) {
+export default function ExpCard({ exp, onDeleteExperience }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
@@ -12,7 +12,14 @@ export default function ExpCard({ exp }) {
   const handleShow = () => setShow(true);
 
   const handleDeleteExperience = () => {
-    dispatch(deleteExperienceAsync({ userId: '65b6dacd8277b800192c90ce', expId: exp._id }));
+    dispatch(deleteExperienceAsync({ userId: '65b6dacd8277b800192c90ce', expId: exp._id }))
+      .then(() => {
+        // Chiamata alla funzione di callback dopo l'eliminazione
+        onDeleteExperience(exp._id);
+      })
+      .catch((error) => {
+        console.error('Errore durante l\'eliminazione dell\'esperienza:', error);
+      });
   };
 
   return (
