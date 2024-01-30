@@ -35,6 +35,7 @@ export default function ProfileComponent() {
         .then((response) => {
           console.log('File caricato con successo:', response.data);
           // Aggiorna lo stato o esegui altre operazioni necessarie
+          fetchData();
         })
         .catch((error) => {
           console.error('Errore durante il caricamento del file:', error);
