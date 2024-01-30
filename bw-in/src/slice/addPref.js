@@ -5,7 +5,7 @@ const initialState = {
   experience: [
     {
       userId: '65b6dacd8277b800192c90ce',
-      experienceData: { 
+      experienceData: {
         role: "CTO",
         company: "Strive School",
         startDate: "2019-06-16",
@@ -55,7 +55,34 @@ export const postExperienceAsync = createAsyncThunk(
         `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
         {
           ...experienceData,
-          
+
+        },
+        {
+          headers: {
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo',
+          },
+        }
+      );
+
+      const data = response.data;
+      console.log("Esperienza aggiunta con successo:", data);
+
+      return data;
+    } catch (error) {
+      console.error("Errore durante l'aggiunta dell'esperienza:", error);
+      throw error;
+    }
+  }
+);
+
+export const deleteExperienceAsync = createAsyncThunk(
+  "experiences/deleteExperience",
+  async ({ userId, expId }) => {
+    try {
+      const response = await axios.delete(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`,
+        {
+
         },
         {
           headers: {
@@ -138,7 +165,7 @@ export const addExpSlice = createSlice({
       .addCase(getPref.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
-        state.experience =  action.payload;
+        state.experience = action.payload;
       })
       .addCase(getPref.rejected, (state, action) => {
         state.loading = false;
@@ -151,12 +178,26 @@ export const addExpSlice = createSlice({
       .addCase(postExperienceAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
-        state.experience =  [ state.experience, action.payload];
+        state.experience = [state.experience, action.payload];
       })
       .addCase(postExperienceAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Error get experience";
+      })
+      .addCase(deleteExperienceAsync.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(deleteExperienceAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.experience = action.payload;
+      })
+      .addCase(deleteExperienceAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Error get experience";
       });
+
   }
 });
 
