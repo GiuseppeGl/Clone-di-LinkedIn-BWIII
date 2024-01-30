@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <HeaderComponent />
         <Routes>
-          <Route element={<HomePage />} path="/feed" />
+          <Route element={<HomePage />} path="/" />
           <Route element={<ProfilePage />} path="/profile" />
           <Route element={<JobsPage />} path="/jobs" />
           <Route element={<EditExperiencePage />} path="/edit" />

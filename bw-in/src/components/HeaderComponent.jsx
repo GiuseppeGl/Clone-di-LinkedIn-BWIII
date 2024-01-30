@@ -25,7 +25,7 @@ export default function HeaderComponent() {
           <nav id="Nav">
             <ul id="NavListWrap">
               <li className="NavList active">
-                <Link className='NavLink' to="/feed">
+                <Link className='NavLink' to="/">
                   <img src="/images/nav-home.svg" alt="" />
                   <span>Home</span>
                   </Link>
