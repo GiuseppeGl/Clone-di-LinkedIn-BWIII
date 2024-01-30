@@ -2,6 +2,8 @@
 
 body {
     background-color: #f8f9fa;
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif; /* Utilizza un font più pulito e moderno */
   }
   
   .container {
@@ -12,9 +14,20 @@ body {
     margin-bottom: 10px;
   }
   
+  #largo,
+  hr {
+    width: 150%;
+  }
+  
   .card {
     border: 1px solid #dee2e6;
     border-radius: 8px;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiungi ombra al passaggio del mouse */
   }
   
   .card-body {
@@ -24,4 +37,6 @@ body {
   .card-subtitle {
     color: #6c757d;
   }
+  
+  /* Aggiungi altri stili personalizzati se necessario */
   
