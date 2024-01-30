@@ -11,8 +11,8 @@ export const deletePref = createAsyncThunk(
   "experiences/delete",
   async ({ userId, expId }) => {
     try {
-      const response = await axios.post(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
+      const response = await axios.delete(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`,
         {
           headers: {
             Authorization:

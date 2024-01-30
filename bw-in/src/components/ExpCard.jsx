@@ -11,11 +11,11 @@ export default function ExpCard({ exp }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleDeleteExperience = () => {
+    dispatch(deleteExperienceAsync({ userId: '65b6dacd8277b800192c90ce', expId: exp._id }));
+  };
 
   return (
-
-
-
     <div className="d-flex border-top mt-2 justify-content-between">
       {exp && (
         <div className="d-flex">
@@ -46,7 +46,7 @@ export default function ExpCard({ exp }) {
           edit
         </Badge>
         <ModalComponent show={show} onHide={handleClose} />
-        <Badge className='text-align-end btn text-white' pill bg="danger" onClick={() => dispatch(deleteExperienceAsync({ expId: exp._id, userId: '65b6dacd8277b800192c90ce' }))}>
+        <Badge className='text-align-end btn text-white' pill bg="danger" onClick={handleDeleteExperience}>
           delete
         </Badge>
       </div>
