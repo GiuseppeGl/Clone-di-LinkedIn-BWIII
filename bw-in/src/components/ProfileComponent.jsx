@@ -20,7 +20,26 @@ export default function ProfileComponent() {
 
   const handleFileUpload = () => {
     // Implementa la logica per il caricamento del file
-    console.log('Caricamento del file');
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+
+      // Esegui la richiesta di caricamento del file
+      axios.post(`https://striveschool-api.herokuapp.com/api/profile/${info._id}/picture`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: '"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI2ZGFjZDgyNzdiODAwMTkyYzkwY2UiLCJpYXQiOjE3MDY0ODIzODEsImV4cCI6MTcwNzY5MTk4MX0.8oohtDRnu27ShzaAsm3TmrTH_wSc2Gsdmbi_uyCaIxo"',
+        },
+      })
+      .then((response) => {
+        console.log('File caricato con successo:', response.data);
+        // Aggiorna lo stato o esegui altre operazioni necessarie
+      })
+      .catch((error) => {
+        console.error('Errore durante il caricamento del file:', error);
+      });
+    }
   };
 
   const handleFileChange = (event) => {
