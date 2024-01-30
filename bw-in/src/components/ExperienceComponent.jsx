@@ -25,7 +25,7 @@ export default function ExperienceComponent() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const isNotHomePage = location.pathname !== '/';
+    const isNotHomePage = location.pathname !== '/profile';
 
     return (
         <>
