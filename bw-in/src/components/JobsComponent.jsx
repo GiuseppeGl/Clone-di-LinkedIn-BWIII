@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
-import { Row } from "react-bootstrap";
+import { Row, Card } from "react-bootstrap";
 export default function JobsComponent() {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
@@ -37,9 +37,9 @@ export default function JobsComponent() {
   };
   console.log(jobs);
   return (
-    <>
-      <Row>
-        <Form onSubmit={fetchJobs}>
+    <Row className="w-75 m-auto">
+      <Row className="">
+        <Form onSubmit={fetchJobs} className="">
           <Form.Control
             size="lg"
             type="text"
@@ -49,27 +49,33 @@ export default function JobsComponent() {
           />
         </Form>
       </Row>
-      <Row>
+      <Row className="justify-content-center">
         {jobs.data &&
           jobs.data.map((job) => {
             return (
-              <div key={job._id} className="px-5">
-                <a href={job.url} className="fs-1 text-dark">
-                  {job.title}
-                </a>
-                <h2>{job.company_name}</h2>
-                <h3>{job.location}</h3>
-                <div dangerouslySetInnerHTML={{ __html: job.description }} />
-                <h5>
-                  <strong className="font-weight-strong">uploaded on: </strong>
-                  {job.publication_date.slice(0, 10)}
-                </h5>
-
-                <hr />
-              </div>
+              <>
+                <Card className="m-2 w-75 ">
+                  <div key={job._id} className="px-5">
+                    <a href={job.url} className="fs-1 text-dark">
+                      {job.title}
+                    </a>
+                    <h2>{job.company_name}</h2>
+                    <h3>{job.location}</h3>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: job.description }}
+                    />
+                    <h5>
+                      <strong className="font-weight-strong">
+                        uploaded on:{" "}
+                      </strong>
+                      {job.publication_date.slice(0, 10)}
+                    </h5>
+                  </div>
+                </Card>
+              </>
             );
           })}
       </Row>
-    </>
+    </Row>
   );
 }
