@@ -39,7 +39,7 @@ export default function JobsComponent() {
   return (
     <Row className="w-75 m-auto">
       <Row className="">
-        <Form onSubmit={fetchJobs} className="">
+        <Form onSubmit={fetchJobs} className="mt-2">
           <Form.Control
             size="lg"
             type="text"
@@ -55,7 +55,7 @@ export default function JobsComponent() {
             return (
               <>
                 <Card className="m-2 w-75 ">
-                  <div key={job._id} className="px-5">
+                  <div key={job._id} className="px-2">
                     <a href={job.url} className="fs-1 text-dark">
                       {job.title}
                     </a>
