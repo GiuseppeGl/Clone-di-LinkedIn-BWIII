@@ -24,6 +24,16 @@ export default function ExperienceComponent() {
 
   const isNotHomePage = location.pathname !== "/profile";
 
+  const fetchData = () => {
+   
+    dispatch(getPref({ userId: "65b6dacd8277b800192c90ce" }));
+  };
+
+  const handleExperienceDelete = () => {
+    // Aggiorna lo stato o richiama fetchData() per ottenere le esperienze aggiornate
+    fetchData();
+  };
+
   return (
     <>
       <Card className="my-2">
@@ -68,7 +78,7 @@ export default function ExperienceComponent() {
           </Row>
           {experiences &&
             experiences.map((esp, index) => {
-              return <ExpCard key={esp._id} exp={esp} />;
+              return <ExpCard key={esp._id} exp={esp} onDeleteExperience={(deletedExpId) => handleExperienceDelete(deletedExpId)} />;
             })}
           <Row className="p-0 text-center">
             <Button
